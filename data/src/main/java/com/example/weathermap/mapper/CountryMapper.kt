@@ -12,14 +12,14 @@ fun CountryDTO.toCountry(): Country {
     )
 }
 
-/*fun CountryDTO.toCountryDetails(): CountryDetails {
+fun CountryDTO.toCountryDetails(): CountryDetails {
     return CountryDetails(
         name = name.common ?: "",
         latlng = capitalInfo.latlng ?: emptyList(),
         continents = continents.first(),
-        flag = flags.pgn
+        flag = flags.png
     )
-}*/
+}
 
 fun List<CountryDTO>.toCountry() : List<Country> {
     return this.map {

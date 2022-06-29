@@ -89,12 +89,12 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
         map.uiSettings.isZoomControlsEnabled = true
 
-        /*map.setOnMarkerClickListener {
+        map.setOnMarkerClickListener {
             val countryName = it.title ?: ""
             val action = MapFragmentDirections.actionMapFragmentToCountryDetailsFragment(countryName)
             findNavController().navigate(action)
 
             true
-        }*/
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.example.weathermap.di
 
 import com.example.weathermap.repository.CountryRemoteRepository
+import com.example.weathermap.usecase.CountriesUseCase
 import com.example.weathermap.usecase.CountryUseCase
 import dagger.Module
 import dagger.Provides
@@ -14,7 +15,15 @@ class UseCaseModule {
 
     @Provides
     @Singleton
-    fun provideCountriesUseCase(countryRemoteRepository: CountryRemoteRepository): CountryUseCase {
+    fun provideCountriesUseCase(countryRemoteRepository: CountryRemoteRepository): CountriesUseCase {
+        return CountriesUseCase(
+            countryRemoteRepository = countryRemoteRepository
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideCountryUseCase(countryRemoteRepository: CountryRemoteRepository): CountryUseCase {
         return CountryUseCase(
             countryRemoteRepository = countryRemoteRepository
         )
