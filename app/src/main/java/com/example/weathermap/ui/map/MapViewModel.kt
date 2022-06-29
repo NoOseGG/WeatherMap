@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 @HiltViewModel
-class MapFragmentViewModel @Inject constructor(
+class MapViewModel @Inject constructor(
     private val countriesUseCase: CountriesUseCase
 ) : ViewModel() {
 

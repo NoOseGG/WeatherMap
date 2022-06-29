@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 @HiltViewModel
-class CountryDetailsFragmentViewModel @Inject constructor(
+class CountryDetailsViewModel @Inject constructor(
     private val countryUseCase: CountryUseCase
 ) : ViewModel() {
 

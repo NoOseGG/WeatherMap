@@ -23,7 +23,7 @@ class CountryDetailsFragment : Fragment() {
     private var _binding: FragmentCountryDetailsBinding? = null
     private val binding get() = requireNotNull(_binding)
     private val args: CountryDetailsFragmentArgs by navArgs()
-    private val viewModel: CountryDetailsFragmentViewModel by viewModels()
+    private val viewModel: CountryDetailsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

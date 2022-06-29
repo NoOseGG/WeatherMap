@@ -15,7 +15,6 @@ import com.example.weathermap.databinding.FragmentMapBinding
 import com.example.weathermap.model.LceState
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -31,7 +30,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     private val mapFragment by lazy {
         childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
     }
-    private val viewModel: MapFragmentViewModel by viewModels()
+    private val viewModel: MapViewModel by viewModels()
 
 
     override fun onCreateView(
