@@ -38,18 +38,33 @@ class CountryDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.sendCountryName(args.countryName)
-
         viewModel.countryFlow.onEach { lce ->
             when(lce) {
                 is LceState.Content -> {
                     Log.i("MyTag", "${lce.value}")
                     binding.tvCountryName.text = lce.value.name
                     binding.imgFlag.load(lce.value.flag)
+                    binding.beach.text = checkLandLocked(lce.value.isLandLocked)
+
+                    //send coordinates in view model, and get weather from coordinates
+                    viewModel.sendCoordinates(lce.value.latlng)
                 }
                 is LceState.Error -> {
                     Toast.makeText(requireContext(), lce.throwable.message, Toast.LENGTH_SHORT)
                         .show()
+                }
+            }
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
+
+        viewModel.weatherFlow.onEach { lce ->
+            when(lce) {
+                is LceState.Content -> {
+                    binding.country.text = lce.value.country
+                    binding.temperature.text = lce.value.temperature.toString()
+                }
+                is LceState.Error -> {
+                    println("ERROR: ${lce.throwable.message}")
+                    Toast.makeText(requireContext(), lce.throwable.message, Toast.LENGTH_SHORT).show()
                 }
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
@@ -58,5 +73,9 @@ class CountryDetailsFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun checkLandLocked(flag: Boolean): String {
+        return if(!flag) "Да" else "Нет"
     }
 }

@@ -17,7 +17,10 @@ fun CountryDTO.toCountryDetails(): CountryDetails {
         name = name.common ?: "",
         latlng = capitalInfo.latlng ?: emptyList(),
         continents = continents.first(),
-        flag = flags.png
+        flag = flags.png,
+        population = population,
+        borders = borders,
+        isLandLocked = landlocked
     )
 }
 
