@@ -19,7 +19,7 @@ fun CountryDTO.toCountryDetails(): CountryDetails {
         continents = continents.first(),
         flag = flags.png,
         population = population,
-        borders = borders,
+        borders = borders ?: emptyList(),
         isLandLocked = landlocked
     )
 }

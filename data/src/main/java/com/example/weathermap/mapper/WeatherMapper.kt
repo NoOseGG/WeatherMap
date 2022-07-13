@@ -6,6 +6,8 @@ import com.example.weathermap.model.WeatherDTO
 fun WeatherDTO.toWeather(): Weather {
     return Weather(
         country = sys.country,
-        temperature = main.temp.toInt()
+        weather = weather.first().main,
+        temperature = main.temp.toInt(),
+        icon = weather.first().icon
     )
 }

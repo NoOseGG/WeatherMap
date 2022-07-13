@@ -5,7 +5,7 @@ data class CountryDTO(
     val capitalInfo: CapitalInfo,
     val continents: List<String>,
     val population: Long,
-    val borders: List<String>,
+    val borders: List<String>?,
     val landlocked: Boolean,
     val capital: List<String>,
     val region: String,
@@ -21,5 +21,5 @@ data class CapitalInfo(
 )
 
 data class Flags(
-    val png: String
+    val png: String?
 )

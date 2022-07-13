@@ -51,7 +51,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         viewModel.countriesFlow.onEach { lce ->
             when (lce) {
                 is LceState.Content -> {
-                    Log.i("MyTag", "${lce.value}")
 
                     lce.value.filter {
                         it.latlng.isNotEmpty()
@@ -87,6 +86,8 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         _map = googleMap
 
         map.uiSettings.isZoomControlsEnabled = true
+        map.uiSettings.isRotateGesturesEnabled = true
+        map.uiSettings.isMapToolbarEnabled = true
 
         map.setOnMarkerClickListener {
             val countryName = it.title ?: ""

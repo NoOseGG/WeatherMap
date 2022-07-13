@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">WeatherMap</string>
+
+    <string name="weather">http://openweathermap.org/img/wn/%1$s@2x.png</string>
+    <string name="btn_all_countries">All countries</string>
+    <string name="btn_send">Send</string>
+    <string name="edit_text_country_name">Enter here:</string>
+    <string name="text_view_country_name">Enter country name</string>
+
+    <string name="temperature">Temperature: %1$s\u2103</string>
+    <string name="population">Population: %1$s</string>
+    <string name="continent">Continent: %1$s</string>
+
+    <string name="toast_no_country">"There is no such country"</string>
+
+
 </resources>

@@ -1,7 +1,6 @@
 package com.example.weathermap.ui.countrydetails
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,8 +8,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import coil.load
+import com.example.weathermap.R
 import com.example.weathermap.databinding.FragmentCountryDetailsBinding
 import com.example.weathermap.model.LceState
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,7 +23,7 @@ class CountryDetailsFragment : Fragment() {
 
     private var _binding: FragmentCountryDetailsBinding? = null
     private val binding get() = requireNotNull(_binding)
-    private val args: CountryDetailsFragmentArgs by navArgs()
+    /*private val args: CountryDetailsFragmentArgs by navArgs()*/
     private val viewModel: CountryDetailsViewModel by viewModels()
 
     override fun onCreateView(
@@ -41,17 +42,18 @@ class CountryDetailsFragment : Fragment() {
         viewModel.countryFlow.onEach { lce ->
             when(lce) {
                 is LceState.Content -> {
-                    Log.i("MyTag", "${lce.value}")
-                    binding.tvCountryName.text = lce.value.name
-                    binding.imgFlag.load(lce.value.flag)
-                    binding.beach.text = checkLandLocked(lce.value.isLandLocked)
+                    println(lce.value)
+                    binding.tvCountry.text = lce.value.name
+                    binding.imgFlag.load(lce.value.flag ?: resources.getDrawable(R.drawable.ic_icon_null))
+                    binding.tvPopulation.text = getString(R.string.population, lce.value.population)
+                    binding.tvContinent.text = getString(R.string.continent, lce.value.continents)
 
-                    //send coordinates in view model, and get weather from coordinates
                     viewModel.sendCoordinates(lce.value.latlng)
                 }
                 is LceState.Error -> {
-                    Toast.makeText(requireContext(), lce.throwable.message, Toast.LENGTH_SHORT)
+                    Toast.makeText(requireContext(), getString(R.string.toast_no_country), Toast.LENGTH_SHORT)
                         .show()
+                    findNavController().popBackStack()
                 }
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)
@@ -59,12 +61,11 @@ class CountryDetailsFragment : Fragment() {
         viewModel.weatherFlow.onEach { lce ->
             when(lce) {
                 is LceState.Content -> {
-                    binding.country.text = lce.value.country
-                    binding.temperature.text = lce.value.temperature.toString()
+                    binding.tvTemperature.text = getString(R.string.temperature, lce.value.temperature)
                 }
                 is LceState.Error -> {
-                    println("ERROR: ${lce.throwable.message}")
-                    Toast.makeText(requireContext(), lce.throwable.message, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), lce.throwable.message, Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         }.launchIn(viewLifecycleOwner.lifecycleScope)

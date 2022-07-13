@@ -23,7 +23,6 @@ class CountryDetailsViewModel @Inject constructor(
 
     val countryFlow = flow {
         val countryDetails = countryUseCase(args.countryName)
-        Log.i("MyTag", "$countryDetails")
         countryDetails.fold(
             onSuccess = { country ->
                 emit(LceState.Content(country))

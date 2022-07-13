@@ -3,8 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/mapFragment">
+    app:startDestination="@id/homeFragment">
 
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.weathermap.ui.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_countryDetailsFragment"
+            app:destination="@id/countryDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/mapFragment"
         android:name="com.example.weathermap.ui.map.MapFragment"
@@ -17,7 +29,8 @@
     <fragment
         android:id="@+id/countryDetailsFragment"
         android:name="com.example.weathermap.ui.countrydetails.CountryDetailsFragment"
-        android:label="CountryDetailsFragment" >
+        android:label="CountryDetailsFragment"
+        tools:layout="@layout/fragment_country_details">
         <argument
             android:name="countryName"
             app:argType="string" />

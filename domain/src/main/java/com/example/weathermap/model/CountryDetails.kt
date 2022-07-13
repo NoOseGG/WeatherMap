@@ -7,5 +7,5 @@ data class CountryDetails(
     val population: Long,
     val borders: List<String>,
     val isLandLocked: Boolean,
-    val flag: String
+    val flag: String?
 )

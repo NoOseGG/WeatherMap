@@ -2,6 +2,7 @@ package com.example.weathermap.model
 
 data class WeatherDTO(
     val sys: Sys,
+    val weather: List<InfoWeather>,
     val main: Main
 )
 
